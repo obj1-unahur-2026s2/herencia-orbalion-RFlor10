@@ -11,5 +11,83 @@ describe "Test CHECK POINT 1"{
                               rol = "Entrenador fisico")}
         )
     }
+}
 
+describe "Test CHECK POINT 1.2"{
+    test "Un equipo lumínico con radiación > 5000 y sin tecnologías activas → su energía total es su energía base."{
+        const lumi = new Luminicos (nombre = "Lumi" ,
+                                        nivelDeEnergiaBase = 100 ,
+                                        //instancio un entrenador para la constante entrenador
+                                        entrenador = new Entrenador(
+                                            ciclosDeExperiencia = 25,
+                                            estaEnSintonia = true,
+                                            nivelDePresicion = 25,
+                                            rol = "Estratega Cuántico"
+                                            ),
+                                        nivelDeRadiacionCapturada = 10000     
+                                        )
+        assert.equals(100, lumi.energiaTotal())         
+                          
+    }
+}
+describe "Test CHECK POINT 1.3"{
+    test "Un equipo lumínico con radiación < 5000 → obtiene el bono del 10%"{
+        const lumi = new Luminicos (nombre = "Lumi" ,
+                                        nivelDeEnergiaBase = 100 ,
+                                        //instancio un entrenador para la constante entrenador
+                                        entrenador = new Entrenador(
+                                            ciclosDeExperiencia = 25,
+                                            estaEnSintonia = true,
+                                            nivelDePresicion = 25,
+                                            rol = "Estratega Cuántico"
+                                            ),
+                                        nivelDeRadiacionCapturada = 4000     
+                                        )
+        assert.equals(110, lumi.energiaTotal())                                
+    }
+}
+
+describe "Test CHECK POINT 1.4"{
+    test "Un equipo sintético con 6 módulos → aplica correctamente la penalización del 20%."{
+        const sint = new Sinteticos (nombre = "Sint",
+                                     nivelDeEnergiaBase = 1000,
+                                     entrenador = new Entrenador(
+                                            ciclosDeExperiencia = 25 ,
+                                            estaEnSintonia = true ,
+                                            nivelDePresicion = 25 ,
+                                            rol = "Estratega Cuántico"
+                                            ) ,
+                                            nivelDeProcesamientoCentral = 10 ,
+                                            cantidadDeModulosActivos = 6 )
+        assert.equals(800, sint.energiaTotal())
+    }
+}
+
+describe "Test CHECK POINT 1.5"{
+    test " Un equipo sintético con 4 módulos y 2 tecnologías complementarias → suma correctamente los valores energéticos."{
+        const synth = new Sinteticos ( nombre = "Synth", 
+                                       nivelDeEnergiaBase = 1000, 
+                                            entrenador = new Entrenador(
+                                            ciclosDeExperiencia = 30 ,
+                                            estaEnSintonia = true ,
+                                            nivelDePresicion = 30 ,
+                                            rol = "Estratega Cuántico"
+                                            )  ,
+                                            nivelDeProcesamientoCentral = 10 , 
+                                            cantidadDeModulosActivos = 4,
+                                            tecnologiasComplementarias = [new TecnologiasEspeciales(
+                                                nombre = "laser" , 
+                                                valorEnergetico = 10,
+                                                activa = true
+                                            ),
+                                            new TecnologiasEspeciales(
+                                                nombre = "rayo" , 
+                                                valorEnergetico = 10,
+                                                activa = true)]
+                                       )
+            assert.equals(4, synth.cantidadDeModulosActivos()) 
+            assert.equals(2,synth.cantTecnologiasComplementariasActivas()) 
+            assert.equals(20, synth.energiaDeTecnologiasActivas())                         
+
+    }
 }

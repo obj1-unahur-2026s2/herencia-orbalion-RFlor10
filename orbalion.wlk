@@ -1,18 +1,21 @@
 class Equipos{
-    const nombre
-    const nivelDeEnergiaBase
-    const entrenador
+    const nombre // "string"
+    const nivelDeEnergiaBase // num
+    const entrenador 
     const tecnologiasComplementarias = [] //lista de tecnologías con nombre, valor energético y estado activo/inactivo
 
     method nombre() = nombre
+
+    method nivelDeEnergiaBase() = nivelDeEnergiaBase
     
     method entrenador() = entrenador
    
     method tecnologiasComplementariasActivas() = tecnologiasComplementarias.filter({t => t.activa()})
+    method cantTecnologiasComplementariasActivas() = self.tecnologiasComplementariasActivas().size()
 
     method energiaDeTecnologiasActivas() = self.tecnologiasComplementariasActivas().sum({ta => ta.valorEnergetico()})
 
-    method energiaTotal() = nivelDeEnergiaBase + self.energiaDeTecnologiasActivas()    
+    method energiaTotal() = self.nivelDeEnergiaBase() + self.energiaDeTecnologiasActivas()    
 }
 
 class Luminicos inherits Equipos{
@@ -22,7 +25,7 @@ class Luminicos inherits Equipos{
     method nivelDeRadiacionCapturada() = nivelDeRadiacionCapturada
     method cristalesSolares() = cristalesSolares
 
-    override method energiaTotal() = if (nivelDeRadiacionCapturada <= 5000) super() * 1.1  
+    override method energiaTotal() = if (self.nivelDeRadiacionCapturada() <= 5000) super() * 1.1  else super()
     // Multiplicar por 1.10 conserva el 100% y agrega un 10%.
 }
 
@@ -35,7 +38,7 @@ class Sinteticos inherits Equipos{
     method cantidadDeModulosActivos() = cantidadDeModulosActivos
     method estanCertificados() = estanCertificados
 
-    override method energiaTotal() = if (cantidadDeModulosActivos > 5) super() * 0.8 
+    override method energiaTotal() = if (cantidadDeModulosActivos > 5) super() * 0.8 else super()
     //100 - 20 = 80, conservo el 80%
 
 }
