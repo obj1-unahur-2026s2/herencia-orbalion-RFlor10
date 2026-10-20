@@ -65,7 +65,18 @@ class Entrenador{
             throw new Exception (message = "Rol no homologado por la FOZ")
         }
     }
-
+    method esDeEliteGalactico() = if (ciclosDeExperiencia < 10)false
+                                    else if (rol == "Estratega Cuántico") nivelDePresicion > 80
+                                    else if (rol == "Arquitecto de Energía")  estaEnSintonia
+                                    else true // para guia mental
+     
+    //method esDeEliteGalactico() = ciclosDeExperiencia > 10 and (
+    //    (rol == "Estratega Cuántico" and nivelDePresicion > 80) or
+    //    (rol == "Arquitecto de Energía" and estaEnSintonia) or
+    //    (rol == "Guía Mental")
+    //    )
+         
+    
 }
 
 class TecnologiasEspeciales{

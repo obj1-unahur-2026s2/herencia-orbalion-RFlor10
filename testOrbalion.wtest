@@ -91,3 +91,34 @@ describe "Test CHECK POINT 1.5"{
 
     }
 }
+
+
+describe "Test CHECK POINT 2"{
+    test "Estratega cuántico con 12 ciclos y precisión 90 → es de élite galáctica"{
+        const estrategaCuantico = new Entrenador(ciclosDeExperiencia = 12,
+                                                estaEnSintonia = true ,
+                                                nivelDePresicion = 90 ,
+                                                rol = "Estratega Cuántico"
+                                                )
+        assert.that(estrategaCuantico.esDeEliteGalactico())  
+    }
+}
+describe "Test CHECK POINT 2.1"{
+    test "Arquitecto de energía con 11 ciclos pero sin sintonía → no es de élite."{
+        const arquitecto = new Entrenador(ciclosDeExperiencia = 11,
+                                          estaEnSintonia = false,
+                                          nivelDePresicion = 100,
+                                          rol = "Arquitecto de Energía"
+                                           )
+    assert.notThat(arquitecto.esDeEliteGalactico())
+    }
+}
+describe "Test CHECK POINT 2.2"{
+    test "Guía mental con 15 ciclos → siempre es de élite."{
+        const guia = new Entrenador (ciclosDeExperiencia = 15 ,
+                                     estaEnSintonia = true,
+                                     nivelDePresicion = 90,
+                                     rol = "Guía Mental")
+    assert.that(guia.esDeEliteGalactico())                                 
+    }
+}
