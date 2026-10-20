@@ -1,0 +1,15 @@
+import orbalion.*
+
+describe "Test CHECK POINT 1"{
+    test  "Un entrenador no puede tener tener un rol distinto a los autorizados por la FOZ."{
+        assert.throwsExceptionLike(
+            new Exception (
+                message = "Rol no homologado por la FOZ"),
+            { new Entrenador (ciclosDeExperiencia = 25,
+                              estaEnSintonia = true,
+                              nivelDePresicion = 25,
+                              rol = "Entrenador fisico")}
+        )
+    }
+
+}
